@@ -22,10 +22,11 @@ class Article extends React.Component {
   componentDidMount() {
     let slug = this.props.match.params.slug;
     let requests = [`/api/articles/${slug}`, `/api/articles/${slug}/comments`];
-    Promise.all(requests.map((request) => fetch(request))).then((data) =>
-      data.map((Sdata) => console.log(Sdata.json()))
-    );
+    Promise.all(requests.map((request) => fetch(request)))
+      .then((data) => data.map((data) => data.json()))
+      .then((jsonData) => console.log(jsonData));
   }
+
   render() {
     const { article } = this.state;
     let comments = [1, 2, 3];

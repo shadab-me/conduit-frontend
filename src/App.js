@@ -7,10 +7,11 @@ import SignUp from "./components/Signup";
 import Article from "./components/Article";
 
 function App() {
+  let user = JSON.parse(localStorage.getItem("user"));
   return (
     <div className="container">
       <Router>
-        <Header />
+        <Header loggedInUser={user} />
         <Route path="/" component={Home} exact />
         <Route path="/signin" component={SignIn} exact />
         <Route path="/signup" component={SignUp} exact />

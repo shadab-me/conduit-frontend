@@ -72,12 +72,13 @@ class SignUp extends React.Component {
       },
     })
       .then((res) => res.json())
-      .then((user) => console.log(user));
+      .then((user) => localStorage.setItem("user", JSON.stringify(user)));
   };
 
   render() {
-    let classes = {};
-    if (this.state.isUserLoggedIn) return <Redirect to="/" />;
+    let classes = "";
+    let isUserLoggedIn = localStorage.getItem("user");
+    if (isUserLoggedIn) return <Redirect to="/" />;
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />

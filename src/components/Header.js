@@ -23,6 +23,8 @@ const theme = createMuiTheme({
 });
 
 function Header(props) {
+  const { loggedInUser } = props;
+  console.log(loggedInUser);
   return (
     <header>
       <AppBar position="static" color="primary">
@@ -31,8 +33,14 @@ function Header(props) {
             <Typography variant="h5">Conduit</Typography>
             <ButtonGroup disableElevation variant="" color="primary">
               <Button href="/">Home</Button>
-              <Button href="/signin">Sign In</Button>
-              <Button href="/signup">Sign Up</Button>
+              {loggedInUser ? (
+                <Button href="/user">{loggedInUser.username}</Button>
+              ) : (
+                <div className="login">
+                  <Button href="/signin">Sign In</Button>
+                  <Button href="/signup">Sign Up</Button>
+                </div>
+              )}
             </ButtonGroup>
           </Toolbar>
         </Container>

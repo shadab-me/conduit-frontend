@@ -20,7 +20,7 @@ class SignIn extends React.Component {
       password: "",
       emailError: "",
       passwordError: "",
-      userIsLoggedIn: true,
+      //userIsLoggedIn: true,
     };
   }
   changeHandler = (e) => {
@@ -52,10 +52,14 @@ class SignIn extends React.Component {
       },
     })
       .then((response) => response.json())
-      .then((json) => console.log(json));
+      .then((json) => {
+        console.log(json.user);
+        localStorage.setItem("user", JSON.stringify(json.user));
+      });
   };
   render() {
-    if (this.state.userIsLoggedIn) {
+    let isUserLoggedIn = localStorage.getItem("user");
+    if (isUserLoggedIn) {
       return <Redirect to="/" />;
     }
     return (

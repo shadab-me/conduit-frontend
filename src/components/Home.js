@@ -17,6 +17,7 @@ class Home extends React.Component {
     super(props);
     this.state = {
       articles: "",
+      tag: "",
     };
   }
 
@@ -34,6 +35,7 @@ class Home extends React.Component {
   }
   render() {
     const { articles } = this.state;
+    console.log(this.state.loggedInUser);
     if (!articles) return <Loader type="Bars" color=""></Loader>;
     return (
       <main>
