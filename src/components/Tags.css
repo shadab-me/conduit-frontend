@@ -1,0 +1,22 @@
+li {
+  list-style: none;
+  border: 0.2 solid #383232;
+  padding: 10px 25px;
+  border: 1px solid rgba(230, 230, 230, 1);
+  padding: 6px 16px;
+  color: rgba(117, 117, 117, 1);
+  border-radius: 5px;
+  margin: 6px 5px;
+  max-width: 33%;
+  cursor: pointer;
+  width: 20%;
+  text-align: center;
+}
+
+.container h5 {
+  margin: 15px 7px;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+}
