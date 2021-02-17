@@ -12,11 +12,11 @@ function App() {
   return (
     <div className="routes">
       <Router>
-        <Header loggedInUser={user.user} />
+        <Header loggedInUser={user} />
         <Route path="/" component={Home} exact />
         <Route path="/signin" component={SignIn} exact />
         <Route path="/signup" component={SignUp} exact />
-        <Route path="/api/articles/:slug" component={Article} exact />
+        <Route path="/articles/:slug" component={Article} exact />
         <Route path="/post" component={Post} exact />
       </Router>
     </div>

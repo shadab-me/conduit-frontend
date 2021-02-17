@@ -72,7 +72,7 @@ class SignUp extends React.Component {
       },
     })
       .then((res) => res.json())
-      .then((user) => localStorage.setItem("user", JSON.stringify(user)));
+      .then((user) => localStorage.setItem("user", JSON.stringify(user.user)));
   };
 
   render() {

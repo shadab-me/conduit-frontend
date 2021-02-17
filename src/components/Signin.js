@@ -38,7 +38,6 @@ class SignIn extends React.Component {
   submitHandler = (e) => {
     e.preventDefault();
     const { email, password } = this.state;
-    let userInfo = {};
     fetch("/api/users/login", {
       method: "POST",
       body: JSON.stringify({
@@ -53,7 +52,6 @@ class SignIn extends React.Component {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json.user);
         localStorage.setItem("user", JSON.stringify(json.user));
       });
   };

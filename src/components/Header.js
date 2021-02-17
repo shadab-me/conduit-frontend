@@ -27,7 +27,6 @@ function logOut() {
 
 function Header(props) {
   const { loggedInUser } = props;
-  console.log(loggedInUser["username"]);
   return (
     <header>
       <AppBar position="static" color="primary">

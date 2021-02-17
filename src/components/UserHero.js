@@ -1,1 +1,3 @@
-function UserHero(props) {}
+function UserHero(props) {
+  return <div className="hero-section"></div>;
+}

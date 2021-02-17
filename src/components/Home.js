@@ -11,6 +11,7 @@ import {
 import React from "react";
 import Loader from "react-loader-spinner";
 import Tags from "../components/Tags";
+import Author from "../components/Author";
 
 class Home extends React.Component {
   constructor(props) {
@@ -47,27 +48,31 @@ class Home extends React.Component {
                     padding: "15px",
                   }}
                 >
-                  <Card style={{ style: "flex" }}>
-                    <CardHeader>
-                      <img src="https://unsplash.com/photos/dTQySHC4uxM"></img>
-                    </CardHeader>
-                    <CardContent>
-                      <Typography variant="h6">{article.title}</Typography>
-                      <Typography variant="p">{article.body}</Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button size="small" color="primary">
-                        Share
-                      </Button>
-                      <Button
-                        size="small"
-                        color="primary"
-                        href={`/api/articles/${article.slug}`}
+                  <div className="card d-flex border border-0 flex-row-reverse p-3">
+                    <div className="img-section  w-25">
+                      <img
+                        src="/img/article.jpg"
+                        alt="random"
+                        className="w-100 mt-3"
+                      ></img>
+                    </div>
+                    <div className="card-body w-75">
+                      <Author username={article.author.username} />
+
+                      <a
+                        href={`/articles/${article.slug}`}
+                        className="text-dark text-decoration-none"
                       >
-                        Learn More
-                      </Button>
-                    </CardActions>
-                  </Card>
+                        {" "}
+                        <h2 className="card-title text-bold font-weight-bold">
+                          {article.title}
+                        </h2>
+                      </a>
+                      <p className="card-text">
+                        {article.description.slice(0, 120)}
+                      </p>
+                    </div>
+                  </div>
                 </article>
               );
             })}
