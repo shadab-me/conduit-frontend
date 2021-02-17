@@ -21,20 +21,29 @@ const theme = createMuiTheme({
     },
   },
 });
+function logOut() {
+  localStorage.clear();
+}
 
 function Header(props) {
   const { loggedInUser } = props;
-  console.log(loggedInUser);
+  console.log(loggedInUser["username"]);
   return (
     <header>
       <AppBar position="static" color="primary">
-        <Container>
+        <Container style={{ width: "100%" }}>
           <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
             <Typography variant="h5">Conduit</Typography>
             <ButtonGroup disableElevation variant="" color="primary">
               <Button href="/">Home</Button>
               {loggedInUser ? (
-                <Button href="/user">{loggedInUser.username}</Button>
+                <div className="loggedIn">
+                  <Button href="/user">{loggedInUser.username}</Button>
+                  <Button href="/" onClick={logOut}>
+                    Log Out
+                  </Button>
+                  <Button href="/post">New Article </Button>
+                </div>
               ) : (
                 <div className="login">
                   <Button href="/signin">Sign In</Button>

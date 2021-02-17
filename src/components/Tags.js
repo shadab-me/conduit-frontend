@@ -26,7 +26,7 @@ class Tags extends React.Component {
     const { tags } = this.state;
     console.log(tags);
     return (
-      <div className="tags-section">
+      <div className="tags-section mt-3">
         <h5>DISCOVER MORE OF WHAT MATTERS TO YOU</h5>
         <div className="tags">
           {tags.map((tag) => {
