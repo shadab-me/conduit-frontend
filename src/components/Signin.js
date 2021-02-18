@@ -20,7 +20,7 @@ class SignIn extends React.Component {
       password: "",
       emailError: "",
       passwordError: "",
-      //userIsLoggedIn: true,
+      userIsLoggedIn: false,
     };
   }
   changeHandler = (e) => {
@@ -53,77 +53,82 @@ class SignIn extends React.Component {
       .then((response) => response.json())
       .then((json) => {
         localStorage.setItem("user", JSON.stringify(json.user));
+        this.setState({
+          userIsLoggedIn: true,
+        });
       });
   };
   render() {
-    let isUserLoggedIn = localStorage.getItem("user");
-    if (isUserLoggedIn) {
+    const { userIsLoggedIn } = this.state;
+    console.log(userIsLoggedIn);
+    if (userIsLoggedIn || localStorage.getItem("user")) {
       return <Redirect to="/" />;
+    } else {
+      return (
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div>
+            <Avatar>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <form>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                onChange={this.changeHandler}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={this.changeHandler}
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                onClick={this.submitHandler}
+              >
+                Sign In
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="/signup" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
+              </Grid>
+            </form>
+          </div>
+        </Container>
+      );
     }
-    return (
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div>
-          <Avatar>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <form>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              onChange={this.changeHandler}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={this.changeHandler}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              onClick={this.submitHandler}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </form>
-        </div>
-      </Container>
-    );
   }
 }
 

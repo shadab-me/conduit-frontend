@@ -40,7 +40,7 @@ class SignUp extends React.Component {
       username: "",
       email: "",
       password: "",
-      isUserLoggedIn: true,
+      token: "",
     };
   }
 
@@ -72,13 +72,19 @@ class SignUp extends React.Component {
       },
     })
       .then((res) => res.json())
-      .then((user) => localStorage.setItem("user", JSON.stringify(user.user)));
+      .then((user) => {
+        localStorage.setItem("user", JSON.stringify(user.user));
+        this.setState({
+          token: user.user.token,
+        });
+      });
   };
 
   render() {
-    let classes = "";
-    let isUserLoggedIn = localStorage.getItem("user");
-    if (isUserLoggedIn) return <Redirect to="/" />;
+    let classes = {};
+    const { token } = this.state;
+    const user = JSON.parse(localStorage.getItem("user"))["token"];
+    if (token || user) return <Redirect to="/"></Redirect>;
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />

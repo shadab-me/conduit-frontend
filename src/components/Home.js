@@ -12,6 +12,7 @@ import React from "react";
 import Loader from "react-loader-spinner";
 import Tags from "../components/Tags";
 import Author from "../components/Author";
+import { Link } from "react-router-dom";
 
 class Home extends React.Component {
   constructor(props) {
@@ -36,7 +37,12 @@ class Home extends React.Component {
   }
   render() {
     const { articles } = this.state;
-    if (!articles) return <Loader type="Bars" color=""></Loader>;
+    if (!articles)
+      return (
+        <div className="loader">
+          <Loader type="Bars" color=""></Loader>
+        </div>
+      );
     return (
       <main>
         <Container style={{ display: "flex" }}>
@@ -59,15 +65,15 @@ class Home extends React.Component {
                     <div className="card-body w-75">
                       <Author username={article.author.username} />
 
-                      <a
-                        href={`/articles/${article.slug}`}
+                      <Link
+                        to={`/articles/${article.slug}`}
                         className="text-dark text-decoration-none"
                       >
                         {" "}
                         <h2 className="card-title text-bold font-weight-bold">
                           {article.title}
                         </h2>
-                      </a>
+                      </Link>
                       <p className="card-text">
                         {article.description.slice(0, 120)}
                       </p>

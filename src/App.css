@@ -9,3 +9,9 @@ article p {
 i {
   cursor: pointer;
 }
+.loader {
+  line-height: 200px;
+  height: 200px;
+  text-align: center;
+  vertical-align: middle;
+}

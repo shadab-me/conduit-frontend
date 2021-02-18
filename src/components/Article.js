@@ -98,7 +98,7 @@ class Article extends React.Component {
             color="#00BFFF"
             height={50}
             width={50}
-            timeout={3000} //3 secs
+            timeout={2000} //3 secs
           />
         </div>
       );

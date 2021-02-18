@@ -5,7 +5,7 @@ class Tags extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tags: [1, 2],
+      tags: "",
     };
   }
 
@@ -24,14 +24,15 @@ class Tags extends React.Component {
 
   render() {
     const { tags } = this.state;
-    console.log(tags);
     return (
       <div className="tags-section mt-3">
-        <h5>DISCOVER MORE OF WHAT MATTERS TO YOU</h5>
-        <div className="tags">
-          {tags.map((tag) => {
-            return <li>{tag}</li>;
-          })}
+        <h5 className="mt-4  ml-2">DISCOVER MORE OF WHAT MATTERS TO YOU</h5>
+        <div className="tags mt-3">
+          {tags
+            ? tags.map((tag) => {
+                return <li>{tag}</li>;
+              })
+            : null}
         </div>
       </div>
     );
