@@ -45,21 +45,29 @@ class Article extends React.Component {
       [name]: value,
     });
   };
-  commentDelete = (e, slug, id) => {
+  commentDelete = async (e, slug, id) => {
     e.preventDefault();
-    fetch(`/api/articles/${slug}/comments/${id}`, {
+    let user = JSON.parse(localStorage.getItem("user"));
+    await fetch(`/api/articles/${slug}/comments/${id}`, {
       method: "DELETE",
       headers: {
-        "Content-type": "application/json",
-        Authorization: JSON.parse(localStorage.getItem("user"))["token"],
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: user.token,
       },
     });
+
+    await fetch(`/api/articles/${slug}/comments`)
+      .then((data) => data.json())
+      .then((comments) =>
+        this.setState({
+          comments: comments,
+        })
+      );
   };
-  commentPost = (e, slug) => {
+  commentPost = async (e, slug) => {
     e.preventDefault();
     const { comment } = this.state;
-    console.log(slug);
-    fetch(`/api/articles/${slug}/comment`, {
+    await fetch(`/api/articles/${slug}/comment`, {
       method: "POST",
       body: JSON.stringify({
         comment: {
@@ -70,11 +78,13 @@ class Article extends React.Component {
         "Content-type": "application/json",
         Authorization: JSON.parse(localStorage.getItem("user"))["token"],
       },
-    })
+    });
+    await fetch(`/api/articles/${slug}/comments`)
       .then((data) => data.json())
-      .then((comment) =>
+      .then((comments) =>
         this.setState({
-          comments: [...this.state.comments, comment],
+          comments: comments,
+          comment: "",
         })
       );
   };
@@ -82,13 +92,15 @@ class Article extends React.Component {
     const { article, comments } = this.state;
     if (!article || !comments) {
       return (
-        <Loader
-          type="Bars"
-          color="#00BFFF"
-          height={50}
-          width={50}
-          timeout={3000} //3 secs
-        />
+        <div className="loader">
+          <Loader
+            type="Bars"
+            color="#00BFFF"
+            height={50}
+            width={50}
+            timeout={3000} //3 secs
+          />
+        </div>
       );
     }
     return (
@@ -134,6 +146,7 @@ class Article extends React.Component {
         </div>
         <textarea
           onChange={this.changeHandler}
+          value={this.state.comment}
           className="form-control"
           placeholder="comment"
           rows="2"
