@@ -1,5 +1,6 @@
 import React from "react";
 import EditorJS from "@editorjs/editorjs";
+import { Link } from "react-router-dom";
 
 class Post extends React.Component {
   constructor(props) {
@@ -73,7 +74,9 @@ class Post extends React.Component {
             className="btn btn-primary pl-5 pr-5 pt-1"
             onClick={this.postHandler}
           >
-            Post
+            <Link to="/">
+              <button className=" btn btn-primary text-white">Post</button>
+            </Link>
           </button>
         </form>
       </div>

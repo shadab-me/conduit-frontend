@@ -83,7 +83,7 @@ class SignUp extends React.Component {
   render() {
     let classes = {};
     const { token } = this.state;
-    const user = JSON.parse(localStorage.getItem("user"))["token"];
+    const user = JSON.parse(localStorage.getItem("user"));
     if (token || user) return <Redirect to="/"></Redirect>;
     return (
       <Container component="main" maxWidth="xs">
